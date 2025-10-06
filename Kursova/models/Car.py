@@ -10,4 +10,4 @@ class Car(Base):
     model = Column(String)
     year = Column(Integer)
     vin = Column(String)
-    technical_state = Column(String)
+    technical_state = Column(String)  # Use 'State' pattern values: "OK", "Broke", etc.

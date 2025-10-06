@@ -9,4 +9,4 @@ class Driver(Base):
     name = Column(String)
     license_number = Column(String)
     experience = Column(Integer)
-    medical_checks = Column(String)
+    medical_checks = Column(String)  # Use 'State' pattern values: "Passed", "Not Passed", etc.
