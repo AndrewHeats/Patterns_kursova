@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Список звітів</h2>
+<table border="1">
+<tr><th>ID</th><th>Початок</th><th>Кінець</th><th>Тип</th><th>Дані</th><th>Дії</th></tr>
+{% for report in reports %}
+<tr>
+    <td>{{ report.id }}</td>
+    <td>{{ report.start_date }}</td>
+    <td>{{ report.end_date }}</td>
+    <td>{{ report.type }}</td>
+    <td>{{ report.data }}</td>
+</tr>
+{% endfor %}
+</table>
+<a href="/reports/new">Створити новий звіт</a>
+{% endblock %}

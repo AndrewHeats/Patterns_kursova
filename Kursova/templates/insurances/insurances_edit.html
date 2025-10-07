@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редагувати страховку</h2>
+<form method="post" action="/insurances/edit/{{ insurance.id }}">
+    Поліс: <input type="text" name="policy_number" value="{{ insurance.policy_number }}" required><br>
+    Дата закінчення: <input type="date" name="expiry_date" value="{{ insurance.expiry_date }}" required><br>
+    Вартість: <input type="number" name="cost" value="{{ insurance.cost }}" required min="0"><br>
+    Машина: <select name="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}" {% if insurance.car_id == car.id %}selected{% endif %}>{{ car.brand }} {{ car.model }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Зберегти">
+</form>
+{% endblock %}

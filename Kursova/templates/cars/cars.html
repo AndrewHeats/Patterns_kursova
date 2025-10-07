@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Список автомобілів</h2>
+<table>
+    <tr><th>ID</th><th>Марка</th><th>Модель</th><th>Рік</th><th>VIN</th><th>Технічний стан</th></tr>
+    {% for car in cars %}
+    <tr>
+        <td>{{ car.id }}</td>
+        <td>{{ car.brand }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.vin }}</td>
+        <td>{{ car.technical_state }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/cars/add">Додати авто</a>
+{% endblock %}

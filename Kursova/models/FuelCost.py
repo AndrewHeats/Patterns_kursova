@@ -4,7 +4,7 @@ from models.base import Base
 
 
 class FuelCost(Base):
-    __tablename__ = 'fuel_costs'
+    __tablename__ = 'fuelcosts'
     id = Column(Integer, primary_key=True)
     date = Column(String)
     type = Column(String)

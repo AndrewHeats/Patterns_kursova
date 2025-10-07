@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати поїздку</h2>
+<form method="post" action="/trips/add">
+    Дата: <input type="date" name="date" required><br>
+    Маршрут: <input type="text" name="route" required><br>
+    Відстань (км): <input type="number" name="distance" required min="0"><br>
+    Авто: <select name="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+        {% endfor %}
+    </select><br>
+    Водій: <select name="driver_id">
+        {% for driver in drivers %}
+        <option value="{{ driver.id }}">{{ driver.name }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Додати поїздку">
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Страхування</h2>
+<table>
+    <tr><th>ID</th><th>Поліс</th><th>Дата закінчення</th><th>Вартість</th><th>Машина</th></tr>
+    {% for ins in insurances %}
+    <tr>
+        <td>{{ ins.id }}</td>
+        <td>{{ ins.policy_number }}</td>
+        <td>{{ ins.expiry_date }}</td>
+        <td>{{ ins.cost }}</td>
+        <td>{{ ins.car_id }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/insurances/add">Додати страховку</a>
+{% endblock %}

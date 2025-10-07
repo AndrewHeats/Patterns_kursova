@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити страховку</h2>
+<p>Ви дійсно хочете видалити поліс від {{ insurance.policy_number }}?</p>
+<form method="post" action="/insurances/delete/{{ insurance.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/insurances">Відмінити</a>
+</form>
+{% endblock %}

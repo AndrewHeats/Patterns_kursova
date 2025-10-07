@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити витрати на паливо</h2>
+<p>Ви дійсно хочете видалити запис від {{ fuel.date }}?</p>
+<form method="post" action="/fuelcosts/delete/{{ fuel.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/fuelcosts">Відмінити</a>
+</form>
+{% endblock %}

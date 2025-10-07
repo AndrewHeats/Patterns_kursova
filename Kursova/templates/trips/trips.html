@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Список поїздок</h2>
+<table>
+    <tr><th>ID</th><th>Дата</th><th>Маршрут</th><th>К-ть км</th><th>Авто</th><th>Водій</th></tr>
+    {% for trip in trips %}
+    <tr>
+        <td>{{ trip.id }}</td>
+        <td>{{ trip.date }}</td>
+        <td>{{ trip.route }}</td>
+        <td>{{ trip.distance }}</td>
+        <td>{{ trip.car_id }}</td>
+        <td>{{ trip.driver_id }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/trips/add">Додати поїздку</a>
+{% endblock %}

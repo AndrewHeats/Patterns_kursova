@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити автомобіль</h2>
+<p>Ви дійсно хочете видалити автомобіль {{ car.brand }} {{ car.model }} (ID: {{ car.id }})?</p>
+<form method="post" action="/cars/delete/{{ car.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/cars">Відмінити</a>
+</form>
+{% endblock %}

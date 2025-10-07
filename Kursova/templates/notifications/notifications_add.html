@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати сповіщення</h2>
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+<form method="post" action="/notifications/add">
+    Дата: <input type="date" name="date" required><br>
+    Тип: <input type="text" name="type" required><br>
+    Повідомлення: <textarea name="message" required></textarea><br>
+    Машина (ID, необов’язково): <input type="number" name="car_id" min="1"><br>
+    Водій (ID, необов’язково): <input type="number" name="driver_id" min="1"><br>
+    <input type="submit" value="Додати">
+</form>
+<a href="/notifications">Повернутися до списку</a>
+{% endblock %}

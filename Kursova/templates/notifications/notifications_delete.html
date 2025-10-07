@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити сповіщення</h2>
+<p>Ви справді хочете видалити сповіщення з ID {{ notification.id }}?</p>
+<form method="post" action="/notifications/delete/{{ notification.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/notifications">Відмінити</a>
+</form>
+{% endblock %}

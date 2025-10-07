@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редагувати ТО</h2>
+<form method="post" action="/maintenances/edit/{{ maintenance.id }}">
+    Дата: <input type="date" name="date" value="{{ maintenance.date }}" required><br>
+    Тип: <input type="text" name="type" value="{{ maintenance.type }}" required><br>
+    Вартість: <input type="number" name="cost" value="{{ maintenance.cost }}" required min="0"><br>
+    Завершено:
+    <select name="done">
+        <option value="true" {% if maintenance.done %}selected{% endif %}>Так</option>
+        <option value="false" {% if not maintenance.done %}selected{% endif %}>Ні</option>
+    </select><br>
+    Машина: <select name="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}" {% if maintenance.car_id == car.id %}selected{% endif %}>{{ car.brand }} {{ car.model }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Зберегти">
+</form>
+{% endblock %}

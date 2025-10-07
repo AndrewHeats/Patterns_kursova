@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редагувати водія</h2>
+<form method="post" action="/drivers/edit/{{ driver.id }}">
+    ПІБ: <input type="text" name="name" value="{{ driver.name }}" required><br>
+    Номер ліцензії: <input type="text" name="license_number" value="{{ driver.license_number }}" required><br>
+    Стаж: <input type="number" name="experience" value="{{ driver.experience }}" required min="0"><br>
+    Медогляд:
+    <select name="medical_checks">
+        <option value="Passed" {% if driver.medical_checks == "Passed" %}selected{% endif %}>Passed</option>
+        <option value="Not Passed" {% if driver.medical_checks == "Not Passed" %}selected{% endif %}>Not Passed</option>
+    </select><br>
+    <input type="submit" value="Зберегти">
+</form>
+{% endblock %}

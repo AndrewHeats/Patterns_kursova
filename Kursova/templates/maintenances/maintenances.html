@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Технічне обслуговування</h2>
+<table>
+    <tr><th>ID</th><th>Дата</th><th>Тип</th><th>Вартість</th><th>Завершено</th><th>Машина</th></tr>
+    {% for m in maintenances %}
+    <tr>
+        <td>{{ m.id }}</td>
+        <td>{{ m.date }}</td>
+        <td>{{ m.type }}</td>
+        <td>{{ m.cost }}</td>
+        <td>{{ m.done }}</td>
+        <td>{{ m.car_id }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/maintenances/add">Додати ТО</a>
+{% endblock %}

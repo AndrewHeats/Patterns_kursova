@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити водія</h2>
+<p>Ви дійсно хочете видалити водія {{ driver.name }} (ID: {{ driver.id }})?</p>
+<form method="post" action="/drivers/delete/{{ driver.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/drivers">Відмінити</a>
+</form>
+{% endblock %}

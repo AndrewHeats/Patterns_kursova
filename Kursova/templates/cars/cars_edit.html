@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редагувати автомобіль</h2>
+<form method="post" action="/cars/edit/{{ car.id }}">
+    Марка: <input type="text" name="brand" value="{{ car.brand }}" required><br>
+    Модель: <input type="text" name="model" value="{{ car.model }}" required><br>
+    Рік випуску: <input type="number" name="year" value="{{ car.year }}" min="1900" max="2100" required><br>
+    VIN: <input type="text" name="vin" value="{{ car.vin }}" required><br>
+    Технічний стан:
+    <select name="technical_state">
+        <option value="OK" {% if car.technical_state = "OK" %}selected{% endif %}>OK</option>
+        <option value="Broke" {% if car.technical_state = "Broke" %}selected{% endif %}>Broke</option>
+    </select><br>
+    <input type="submit" value="Зберегти">
+</form>
+{% endblock %}

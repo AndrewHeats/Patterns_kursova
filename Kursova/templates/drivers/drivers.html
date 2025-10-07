@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Список водіїв</h2>
+<table>
+    <tr><th>ID</th><th>ПІБ</th><th>Ліцензія</th><th>Стаж</th><th>Медогляд</th></tr>
+    {% for driver in drivers %}
+    <tr>
+        <td>{{ driver.id }}</td>
+        <td>{{ driver.name }}</td>
+        <td>{{ driver.license_number }}</td>
+        <td>{{ driver.experience }}</td>
+        <td>{{ driver.medical_checks }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/drivers/add">Додати водія</a>
+{% endblock %}

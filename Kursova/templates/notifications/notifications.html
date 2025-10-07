@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Сповіщення</h2>
+<table>
+    <tr><th>ID</th><th>Дата</th><th>Тип</th><th>Повідомлення</th><th>Машина</th><th>Водій</th></tr>
+    {% for n in notifications %}
+    <tr>
+        <td>{{ n.id }}</td>
+        <td>{{ n.date }}</td>
+        <td>{{ n.type }}</td>
+        <td>{{ n.message }}</td>
+        <td>{{ n.car_id }}</td>
+        <td>{{ n.driver_id }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
