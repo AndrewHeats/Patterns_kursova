@@ -35,8 +35,8 @@ def car_strategy(session, car_id, start, end):
     km = sum(t.distance for t in trips)
     return f"Car {car_id}: trips={trips_cnt}, km={km}"
 
-# View: показати звіти
-@report_bp.route('/')
+# View: список звітів
+@report_bp.route('/', methods=['GET'])
 def list_reports():
     session = Session()
     reports = session.query(Report).all()
@@ -44,7 +44,7 @@ def list_reports():
     session.close()
     return render_template('reports/reports.html', reports=reports, cars=cars)
 
-# View: створити звіт
+# View: створення звіту
 @report_bp.route('/new', methods=['GET', 'POST'])
 def create_report_view():
     session = Session()
@@ -63,7 +63,6 @@ def create_report_view():
             result = car_strategy(session, car_id, start, end)
         else:
             result = 'Unknown type'
-
         report = Report(start_date=start, end_date=end, type=report_type, data=result)
         session.add(report)
         session.commit()
@@ -72,7 +71,7 @@ def create_report_view():
     session.close()
     return render_template('reports/reports_add.html', cars=cars)
 
-# API: отримати звіти
+# API: отримати всі звіти
 @report_bp.route('/api', methods=['GET'])
 def api_get_reports():
     session = Session()
@@ -87,7 +86,7 @@ def api_get_reports():
     session.close()
     return jsonify(result)
 
-# API: створити звіт (опціонально можна мати)
+# API: створити звіт
 @report_bp.route('/api', methods=['POST'])
 def api_create_report():
     session = Session()

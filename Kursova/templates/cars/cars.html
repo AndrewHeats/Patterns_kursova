@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <h2>Список автомобілів</h2>
 <table>
     <tr><th>ID</th><th>Марка</th><th>Модель</th><th>Рік</th><th>VIN</th><th>Технічний стан</th></tr>
@@ -14,5 +15,5 @@
     </tr>
     {% endfor %}
 </table>
-<a href="/cars/add">Додати авто</a>
+<a href="/cars/add" class="adding_rel">Додати авто</a>
 {% endblock %}
