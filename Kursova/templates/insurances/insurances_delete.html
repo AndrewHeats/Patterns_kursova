@@ -4,6 +4,6 @@
 <p>Ви дійсно хочете видалити поліс від {{ insurance.policy_number }}?</p>
 <form method="post" action="/insurances/delete/{{ insurance.id }}">
     <button type="submit">Так, видалити</button>
-    <a href="/insurances">Відмінити</a>
+    <a href="/insurances" class="cancel-btn">Відмінити</a>
 </form>
 {% endblock %}

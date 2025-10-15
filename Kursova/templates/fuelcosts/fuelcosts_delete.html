@@ -4,6 +4,6 @@
 <p>Ви дійсно хочете видалити запис від {{ fuel.date }}?</p>
 <form method="post" action="/fuelcosts/delete/{{ fuel.id }}">
     <button type="submit">Так, видалити</button>
-    <a href="/fuelcosts">Відмінити</a>
+    <a href="/fuelcosts" class="cancel-btn">Відмінити</a>
 </form>
 {% endblock %}

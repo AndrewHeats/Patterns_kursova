@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <h2>Список автомобілів</h2>
 <table>
-    <tr><th>ID</th><th>Марка</th><th>Модель</th><th>Рік</th><th>VIN</th><th>Технічний стан</th></tr>
+    <tr>
+        <th>ID</th>
+        <th>Марка</th>
+        <th>Модель</th>
+        <th>Рік</th>
+        <th>VIN</th>
+        <th>Технічний стан</th>
+        <th>Дії</th>
+    </tr>
     {% for car in cars %}
     <tr>
         <td>{{ car.id }}</td>
@@ -12,6 +19,10 @@
         <td>{{ car.year }}</td>
         <td>{{ car.vin }}</td>
         <td>{{ car.technical_state }}</td>
+        <td>
+            <a href="/cars/edit/{{ car.id }}" class="btn-table edit-btn">Оновити</a>
+            <a href="/cars/delete/{{ car.id }}" class="btn-table delete-btn">Видалити</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

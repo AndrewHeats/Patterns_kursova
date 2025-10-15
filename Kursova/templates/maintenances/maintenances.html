@@ -2,7 +2,15 @@
 {% block content %}
 <h2>Технічне обслуговування</h2>
 <table>
-    <tr><th>ID</th><th>Дата</th><th>Тип</th><th>Вартість</th><th>Завершено</th><th>Машина</th></tr>
+    <tr>
+        <th>ID</th>
+        <th>Дата</th>
+        <th>Тип</th>
+        <th>Вартість</th>
+        <th>Завершено</th>
+        <th>Машина</th>
+        <th>Дії</th>
+    </tr>
     {% for m in maintenances %}
     <tr>
         <td>{{ m.id }}</td>
@@ -11,6 +19,10 @@
         <td>{{ m.cost }}</td>
         <td>{{ m.done }}</td>
         <td>{{ m.car_id }}</td>
+        <td>
+            <a href="/maintenances/edit/{{ m.id }}" class="btn-table edit-btn">Оновити</a>
+            <a href="/maintenances/delete/{{ m.id }}" class="btn-table delete-btn">Видалити</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

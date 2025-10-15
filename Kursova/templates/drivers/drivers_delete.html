@@ -4,6 +4,6 @@
 <p>Ви дійсно хочете видалити водія {{ driver.name }} (ID: {{ driver.id }})?</p>
 <form method="post" action="/drivers/delete/{{ driver.id }}">
     <button type="submit">Так, видалити</button>
-    <a href="/drivers">Відмінити</a>
+    <a href="/drivers" class="cancel-btn">Відмінити</a>
 </form>
 {% endblock %}

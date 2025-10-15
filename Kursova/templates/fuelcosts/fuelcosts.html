@@ -2,7 +2,14 @@
 {% block content %}
 <h2>Витрати на паливо</h2>
 <table>
-    <tr><th>ID</th><th>Дата</th><th>Тип</th><th>Вартість</th><th>Машина</th></tr>
+    <tr>
+        <th>ID</th>
+        <th>Дата</th>
+        <th>Тип</th>
+        <th>Вартість</th>
+        <th>Машина</th>
+        <th>Дії</th>
+    </tr>
     {% for fuel in fuelcosts %}
     <tr>
         <td>{{ fuel.id }}</td>
@@ -10,6 +17,10 @@
         <td>{{ fuel.type }}</td>
         <td>{{ fuel.cost }}</td>
         <td>{{ fuel.car_id }}</td>
+        <td>
+            <a href="/fuelcosts/edit/{{ fuel.id }}" class="btn-table edit-btn">Оновити</a>
+            <a href="/fuelcosts/delete/{{ fuel.id }}" class="btn-table delete-btn">Видалити</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

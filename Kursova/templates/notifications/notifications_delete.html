@@ -4,6 +4,6 @@
 <p>Ви справді хочете видалити сповіщення з ID {{ notification.id }}?</p>
 <form method="post" action="/notifications/delete/{{ notification.id }}">
     <button type="submit">Так, видалити</button>
-    <a href="/notifications">Відмінити</a>
+    <a href="/notifications" class="cancel-btn">Відмінити</a>
 </form>
 {% endblock %}

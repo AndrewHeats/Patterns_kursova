@@ -159,3 +159,50 @@ ul.main-menu li {
     background: #fff200;
     color: #1976d2;
 }
+.btn-table {
+    display: inline-block;
+    padding: 6px 18px;
+    margin: 0 3px 2px 0;
+    border-radius: 5px;
+    font-size: 0.99em;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.18s, color 0.18s;
+}
+.edit-btn {
+    background: #e3f3fc;
+    color: #1565c0;
+    border: 1px solid #b0dcfa;
+}
+.edit-btn:hover {
+    background: #1976d2;
+    color: #fffde7;
+    border: 1px solid #1976d2;
+}
+.delete-btn {
+    background: #ffd6d3;
+    color: #d32f2f;
+    border: 1px solid #fab0b0;
+}
+.delete-btn:hover {
+    background: #d32f2f;
+    color: #fff;
+    border: 1px solid #d32f2f;
+}
+
+.cancel-btn {
+    background: #757575;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #494949;
+}
+

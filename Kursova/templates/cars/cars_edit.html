@@ -8,8 +8,10 @@
     VIN: <input type="text" name="vin" value="{{ car.vin }}" required><br>
     Технічний стан:
     <select name="technical_state">
-        <option value="OK" {% if car.technical_state = "OK" %}selected{% endif %}>OK</option>
-        <option value="Broke" {% if car.technical_state = "Broke" %}selected{% endif %}>Broke</option>
+        <option value="OK" {% if car.technical_state==
+        "OK" %}selected{% endif %}>OK</option>
+        <option value="Broke" {% if car.technical_state==
+        "Broke" %}selected{% endif %}>Broke</option>
     </select><br>
     <input type="submit" value="Зберегти">
 </form>

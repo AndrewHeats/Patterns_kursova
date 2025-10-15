@@ -4,6 +4,6 @@
 <p>Ви дійсно хочете видалити автомобіль {{ car.brand }} {{ car.model }} (ID: {{ car.id }})?</p>
 <form method="post" action="/cars/delete/{{ car.id }}">
     <button type="submit">Так, видалити</button>
-    <a href="/cars">Відмінити</a>
+    <a href="/cars" class="cancel-btn">Відмінити</a>
 </form>
 {% endblock %}

@@ -2,7 +2,14 @@
 {% block content %}
 <h2>Список водіїв</h2>
 <table>
-    <tr><th>ID</th><th>ПІБ</th><th>Ліцензія</th><th>Стаж</th><th>Медогляд</th></tr>
+    <tr>
+        <th>ID</th>
+        <th>ПІБ</th>
+        <th>Ліцензія</th>
+        <th>Стаж</th>
+        <th>Медогляд</th>
+        <th>Дії</th>
+    </tr>
     {% for driver in drivers %}
     <tr>
         <td>{{ driver.id }}</td>
@@ -10,6 +17,10 @@
         <td>{{ driver.license_number }}</td>
         <td>{{ driver.experience }}</td>
         <td>{{ driver.medical_checks }}</td>
+        <td>
+            <a href="/drivers/edit/{{ driver.id }}" class="btn-table edit-btn">Оновити</a>
+            <a href="/drivers/delete/{{ driver.id }}" class="btn-table delete-btn">Видалити</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

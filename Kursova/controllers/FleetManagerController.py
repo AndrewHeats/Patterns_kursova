@@ -9,7 +9,7 @@ engine = create_engine('sqlite:///fleet.db')
 Session = sessionmaker(bind=engine)
 
 
-@fleetmanager_bp.route('/fleet/notifications', methods=['GET'])
+@fleetmanager_bp.route('/notifications', methods=['GET'])
 def get_all_notifications():
     session = Session()
     nots = session.query(Notification).all()

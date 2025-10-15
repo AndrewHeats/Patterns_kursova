@@ -36,6 +36,18 @@ def add_car_view():
         )
         session.add(new_car)
         session.commit()
+
+        # Якщо новий автомобіль одразу в стані Broke, створюємо сповіщення
+        if new_car.technical_state == "Broke":
+            notif = Notification(
+                date=datetime.date.today(),
+                type="CarBroke",
+                message=f"Автомобіль #{new_car.id} одразу в стані Broke",
+                car_id=new_car.id
+            )
+            session.add(notif)
+            session.commit()
+
         session.close()
         return redirect(url_for('car.list_cars'))
     session.close()
@@ -58,14 +70,17 @@ def edit_car(id):
         car.vin = data['vin']
         car.technical_state = data['technical_state']
         session.commit()
+
         if old_state != "Broke" and car.technical_state == "Broke":
             notif = Notification(
                 date=datetime.date.today(),
                 type="CarBroke",
                 message=f"Автомобіль #{car.id} перейшов у стан Broke",
-                car_id=car.id)
+                car_id=car.id
+            )
             session.add(notif)
             session.commit()
+
         session.close()
         return redirect(url_for('car.list_cars'))
     session.close()
@@ -99,6 +114,18 @@ def api_add_car():
     car = Car(**data)
     session.add(car)
     session.commit()
+
+    # Якщо новий автомобіль одразу в стані Broke, створюємо сповіщення
+    if car.technical_state == "Broke":
+        notification = Notification(
+            date=datetime.date.today().isoformat(),
+            type="CarBroke",
+            message=f"Автомобіль #{car.id} одразу в стані Broke",
+            car_id=car.id
+        )
+        session.add(notification)
+        session.commit()
+
     session.close()
     return jsonify({'message': 'Авто додано!'}), 201
 
@@ -124,14 +151,17 @@ def api_update_car(id):
     for key, value in request.json.items():
         setattr(car, key, value)
     session.commit()
+
     if prev_state != "Broke" and car.technical_state == "Broke":
         notification = Notification(
             date=datetime.date.today().isoformat(),
             type="CarBroke",
             message=f"Автомобіль #{car.id} перейшов у стан Broke",
-            car_id=car.id)
+            car_id=car.id
+        )
         session.add(notification)
         session.commit()
+
     session.close()
     return jsonify({'message': 'Автомобіль оновлено'})
 
