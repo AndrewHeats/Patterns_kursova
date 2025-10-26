@@ -205,4 +205,54 @@ ul.main-menu li {
 .cancel-btn:hover {
     background: #494949;
 }
+.trip-form {
+    background: #ffffff;
+    width: 400px;
+    margin: 30px auto;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #e0e0e0;
+}
+.trip-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+.trip-form input, .trip-form select {
+    width: 100%;
+}
+.alert {
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+}
+nav, .nav {
+    background: #222;
+    padding: 15px;
+    color: #fff;
+    text-align: center;
+}
+nav a, .nav a {
+    color: #f0d618;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+nav a:hover, .nav a:hover {
+    text-decoration: underline;
+}
+h1, h2 {
+    color: #003366;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
 

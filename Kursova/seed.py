@@ -18,7 +18,11 @@ engine = create_engine('sqlite:///fleet.db')
 Session = sessionmaker(bind=engine)
 Base.metadata.create_all(engine)
 
+def random_date(start, end):
 
+    delta = end - start
+    random_days = random.randint(0, delta.days)
+    return start + datetime.timedelta(days=random_days)
 def seed_database():
     session = Session()
     session.query(Notification).delete()
@@ -77,40 +81,40 @@ def seed_database():
                        medical_checks="Passed"))
 
     session.add(
-        Trip(id=1, date=today, route=f"Kyiv-Lviv", distance=556, car_id=random.randint(1, 10),
+        Trip(id=1, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Kyiv-Lviv", distance=556, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=2, date=today, route=f"Rivne-Lviv", distance=315, car_id=random.randint(1, 10),
+        Trip(id=2, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Rivne-Lviv", distance=315, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=3, date=today, route=f"Kyiv-Kramatorsk", distance=225, car_id=random.randint(1, 10),
+        Trip(id=3, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Kyiv-Kramatorsk", distance=225, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=4, date=today, route=f"Ternopil-Ratne", distance=480, car_id=random.randint(1, 10),
+        Trip(id=4, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Ternopil-Ratne", distance=480, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=5, date=today, route=f"Poltava-Lviv", distance=1112, car_id=random.randint(1, 10),
+        Trip(id=5, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Poltava-Lviv", distance=1112, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=6, date=today, route=f"Kyiv-Dnipro", distance=356, car_id=random.randint(1, 10),
+        Trip(id=6, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Kyiv-Dnipro", distance=356, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=7, date=today, route=f"Uzhorod-Ternopil", distance=682, car_id=random.randint(1, 10),
+        Trip(id=7, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Uzhorod-Ternopil", distance=682, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=8, date=today, route=f"Briukhovychi-Lviv", distance=5, car_id=random.randint(1, 10),
+        Trip(id=8, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Briukhovychi-Lviv", distance=5, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=9, date=today, route=f"Ratne-Lutsk", distance=82, car_id=random.randint(1, 10),
+        Trip(id=9, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Ratne-Lutsk", distance=82, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
     session.add(
-        Trip(id=10, date=today, route=f"Khmelnytskyy-Cherkasy", distance=432, car_id=random.randint(1, 10),
+        Trip(id=10, date=today - datetime.timedelta(days=15 * random.randint(0,11)), route=f"Khmelnytskyy-Cherkasy", distance=432, car_id=random.randint(1, 10),
              driver_id=random.randint(1, 10)))
 
     for i in range(1,11):
         session.add(
             FuelCost(id=i, date=today, type="Petrol", cost=random.randint(50, 1000), car_id=random.randint(1, 11)))
-        session.add(Maintenance(id=i, date=today, type="TO", cost=random.randint(100, 10000), done=False,
+        session.add(Maintenance(id=i, date=today, type="TO", cost=random.randint(100, 10000), done=True,
                                 car_id=random.randint(1, 11)))
         expiry = today + datetime.timedelta(days=30 * i)
         session.add(Insurance(id=i, policy_number=f"Policy{i}", expiry_date=expiry, cost=50, car_id=i))

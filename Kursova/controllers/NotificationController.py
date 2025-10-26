@@ -1,5 +1,4 @@
-import datetime
-from flask import Blueprint, jsonify, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, jsonify, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models.Notification import Notification
@@ -12,89 +11,43 @@ Session = sessionmaker(bind=engine)
 @notif_bp.route('/')
 def list_notifications():
     session = Session()
-    notifications = session.query(Notification).all()
-    session.close()
-    return render_template('notifications/notifications.html', notifications=notifications)
+    # Читаємо параметри з URL
+    notif_type = request.args.get('type', default=None)
+    date_from = request.args.get('from', default=None)
+    date_to = request.args.get('to', default=None)
 
-# View: додати сповіщення (опціонально)
-@notif_bp.route('/add', methods=['GET', 'POST'])
-def add_notification_view():
-    if request.method == 'POST':
-        session = Session()
-        data = request.form
-        notification = Notification(
-            date=datetime.datetime.strptime(data['date'], "%Y-%m-%d").date(),
-            type=data['type'],
-            message=data['message'],
-            car_id=int(data['car_id']) if data.get('car_id') else None,
-            driver_id=int(data['driver_id']) if data.get('driver_id') else None
-        )
-        session.add(notification)
-        session.commit()
-        session.close()
-        return redirect(url_for('notif.list_notifications'))
-    return render_template('notifications/notifications_add.html')
+    query = session.query(Notification)
 
-# View: видалити сповіщення
-@notif_bp.route('/delete/<int:id>', methods=['GET', 'POST'])
-def delete_notification_view(id):
-    session = Session()
-    notif = session.query(Notification).filter_by(id=id).first()
-    if not notif:
-        session.close()
-        return "Сповіщення не знайдено", 404
-    if request.method == 'POST':
-        session.delete(notif)
-        session.commit()
-        session.close()
-        return redirect(url_for('notif.list_notifications'))
+    if notif_type and notif_type != '' and notif_type != 'Інші':
+        query = query.filter(Notification.type == notif_type)
+    elif notif_type == 'Інші':
+        known_types = ['CarBroke', 'TripConflict', 'Maintenance', 'MaintenanceConflict', 'DriverMedical']
+        query = query.filter(~Notification.type.in_(known_types))
+
+    if date_from:
+        query = query.filter(Notification.date >= date_from)
+    if date_to:
+        query = query.filter(Notification.date <= date_to)
+
+    notifications = query.order_by(Notification.date.desc()).all()
+
     session.close()
-    return render_template('notifications/notifications_delete.html', notification=notif)
+
+    # Передаємо у шаблон для збереження стану фільтра
+    return render_template('notifications/notifications.html',
+                           notifications=notifications,
+                           notif_type=notif_type,
+                           date_from=date_from,
+                           date_to=date_to)
 
 # API: отримати всі сповіщення
 @notif_bp.route('/api', methods=['GET'])
 def api_get_notifications():
     session = Session()
-    notifications = session.query(Notification).all()
-    result = []
-    for n in notifications:
-        result.append({
-            "id": n.id,
-            "date": n.date.isoformat(),
-            "type": n.type,
-            "message": n.message,
-            "car_id": n.car_id,
-            "driver_id": n.driver_id
-        })
+    notifs = session.query(Notification).all()
+    result = [{
+        "id": n.id, "date": n.date.isoformat(), "type": n.type,
+        "message": n.message, "car_id": n.car_id, "driver_id": n.driver_id
+    } for n in notifs]
     session.close()
     return jsonify(result)
-
-# API: створити сповіщення
-@notif_bp.route('/api', methods=['POST'])
-def api_add_notification():
-    session = Session()
-    data = request.json
-    notification = Notification(
-        date=datetime.datetime.strptime(data['date'], "%Y-%m-%d").date(),
-        type=data['type'],
-        message=data['message'],
-        car_id=data.get('car_id'),
-        driver_id=data.get('driver_id')
-    )
-    session.add(notification)
-    session.commit()
-    session.close()
-    return jsonify({'message': 'Сповіщення створено'}), 201
-
-# API: видалити сповіщення
-@notif_bp.route('/api/<int:id>', methods=['DELETE'])
-def api_delete_notification(id):
-    session = Session()
-    notification = session.query(Notification).filter_by(id=id).first()
-    if not notification:
-        session.close()
-        return jsonify({'error': 'Сповіщення не знайдено'}), 404
-    session.delete(notification)
-    session.commit()
-    session.close()
-    return jsonify({'message': 'Сповіщення видалено'})

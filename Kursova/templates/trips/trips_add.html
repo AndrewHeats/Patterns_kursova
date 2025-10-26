@@ -1,20 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h2>Додати поїздку</h2>
-<form method="post" action="/trips/add">
-    Дата: <input type="date" name="date" required><br>
-    Маршрут: <input type="text" name="route" required><br>
-    Відстань (км): <input type="number" name="distance" required min="0"><br>
-    Авто: <select name="car_id">
-        {% for car in cars %}
-        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
-        {% endfor %}
-    </select><br>
-    Водій: <select name="driver_id">
-        {% for driver in drivers %}
-        <option value="{{ driver.id }}">{{ driver.name }}</option>
-        {% endfor %}
-    </select><br>
-    <input type="submit" value="Додати поїздку">
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    <strong>Помилка:</strong> {{ error }}
+</div>
+{% endif %}
+
+<form method="POST" action="{{ url_for('trip.add_trip') }}">
+    <table>
+        <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Маршрут</th>
+                <th>К-ть км</th>
+                <th>Авто</th>
+                <th>Водій</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="date" name="date" required>
+                </td>
+                <td>
+                    <input type="text" name="route" placeholder="Kyiv - Lviv" required>
+                </td>
+                <td>
+                    <input type="number" name="distance" min="1" required>
+                </td>
+                <td>
+                    <select name="car_id" required>
+                        <option value="">Оберіть автомобіль</option>
+                        {% for car in cars %}
+                        <option value="{{ car.id }}">
+                            {{ car.brand }} {{ car.model }}
+                            {% if car.technical_state is defined and car.technical_state == 'Broke' %}
+                                — ⚠️ зламане авто
+                            {% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="driver_id" required>
+                        <option value="">Оберіть водія</option>
+                        {% for driver in drivers %}
+                        <option value="{{ driver.id }}">
+                            {{ driver.name }}
+                            {% if driver.medical_check_passed is defined and not driver.medical_check_passed %}
+                                — ❌ медогляд не пройдено
+                            {% endif %}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button type="submit" class="btn-table edit-btn">Зберегти</button>
+        <a href="{{ url_for('trip.list_trips') }}" class="btn-table delete-btn">Скасувати</a>
+    </div>
 </form>
+
 {% endblock %}
