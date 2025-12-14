@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Автопарк</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="/">Головна</a>
+        <a href="/cars/">Автомобілі</a>
+        <a href="/drivers/">Водії</a>
+        <a href="/trips/">Поїздки</a>
+        <a href="/maintenances/">ТО</a>
+        <a href="/fuelcosts/">Витрати на паливо</a>
+        <a href="/insurances/">Страхування</a>
+        <a href="/notifications/">Сповіщення</a>
+        <a href="/reports/">Звіти</a>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

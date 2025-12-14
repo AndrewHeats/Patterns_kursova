@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="welcome-box">
+    <h1>Вітаємо у системі управління автопарком</h1>
+    <ul class="main-menu">
+        <li><a href="/cars" class="menu-link"><span>🚗</span> Автомобілі</a></li>
+        <li><a href="/drivers" class="menu-link"><span>👷</span> Водії</a></li>
+        <li><a href="/trips" class="menu-link"><span>🛣️</span> Поїздки</a></li>
+        <li><a href="/maintenances" class="menu-link"><span>🔧</span> ТО</a></li>
+        <li><a href="/fuelcosts" class="menu-link"><span>⛽</span> Витрати на паливо</a></li>
+        <li><a href="/insurances" class="menu-link"><span>🛡️</span> Страхування</a></li>
+        <li><a href="/notifications" class="menu-link"><span>🔔</span> Сповіщення</a></li>
+        <li><a href="/reports" class="menu-link special"><span>📊</span> Звіти</a></li>
+    </ul>
+</div>
+{% endblock %}

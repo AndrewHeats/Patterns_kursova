@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати автомобіль</h2>
+<form method="post" action="/cars/add">
+    Марка: <input type="text" name="brand" required><br>
+    Модель: <input type="text" name="model" required><br>
+    Рік випуску: <input type="number" name="year" min="1900" max="2100" required><br>
+    VIN: <input type="text" name="vin" required><br>
+    Технічний стан:
+    <select name="technical_state">
+        <option value="OK">OK</option>
+        <option value="Broke">Broke</option>
+    </select><br>
+    <input type="submit" value="Додати">
+</form>
+{% endblock %}

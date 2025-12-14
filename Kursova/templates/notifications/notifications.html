@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Сповіщення</h2>
+
+<form method="get" action="{{ url_for('notif.list_notifications') }}" class="filter-form">
+
+    <label for="type">Тип:</label>
+    <select name="type" id="type">
+        <option value="">Усі</option>
+        <option value="CarBroke" {% if notif_type == 'CarBroke' %}selected{% endif %}>CarBroke</option>
+        <option value="TripConflict" {% if notif_type == 'TripConflict' %}selected{% endif %}>TripConflict</option>
+        <option value="Maintenance" {% if notif_type == 'Maintenance' %}selected{% endif %}>Maintenance</option>
+        <option value="MaintenanceConflict" {% if notif_type == 'MaintenanceConflict' %}selected{% endif %}>MaintenanceConflict</option>
+        <option value="DriverMedical" {% if notif_type == 'DriverMedical' %}selected{% endif %}>DriverMedical</option>
+        <option value="Other" {% if notif_type == 'Other' %}selected{% endif %}>Інші</option>
+    </select>
+
+    <label for="from">Від:</label>
+    <input type="date" id="from" name="from" value="{{ date_from if date_from }}">
+
+    <label for="to">До:</label>
+    <input type="date" id="to" name="to" value="{{ date_to if date_to }}">
+
+    <button type="submit" class="btn-table edit-btn">Фільтрувати</button>
+    <a href="{{ url_for('notif.list_notifications') }}" class="btn-table delete-btn">Скинути</a>
+
+</form>
+
+{% if notifications %}
+<table border="1" style="width:100%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Дата</th>
+            <th>Тип</th>
+            <th>Повідомлення</th>
+            <th>Машина</th>
+            <th>Водій</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for n in notifications %}
+        <tr>
+            <td>{{ n.id }}</td>
+            <td>{{ n.date }}</td>
+            <td>{{ n.type }}</td>
+            <td>{{ n.message }}</td>
+            <td>{{ n.car_id if n.car_id else '-' }}</td>
+            <td>{{ n.driver_id if n.driver_id else '-' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>Немає сповіщень за заданими параметрами.</p>
+{% endif %}
+{% endblock %}

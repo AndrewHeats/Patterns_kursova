@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити поїздку</h2>
+<p>Ви дійсно хочете видалити поїздку {{ trip.route }} (ID: {{ trip.id }})?</p>
+<form method="post" action="/trips/delete/{{ trip.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/trips" class="cancel-btn">Відмінити</a>
+</form>
+{% endblock %}

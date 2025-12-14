@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати страховку</h2>
+<form method="post" action="/insurances/add">
+    Поліс: <input type="text" name="policy_number" required><br>
+    Дата закінчення: <input type="date" name="expiry_date" required><br>
+    Вартість: <input type="number" name="cost" required min="0"><br>
+    Машина: <select name="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Додати">
+</form>
+{% endblock %}

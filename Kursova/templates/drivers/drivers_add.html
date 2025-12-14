@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати водія</h2>
+<form method="post" action="/drivers/add">
+    ПІБ: <input type="text" name="name" required><br>
+    Номер ліцензії: <input type="text" name="license_number" required><br>
+    Стаж: <input type="number" name="experience" required min="0"><br>
+    Медогляд:
+    <select name="medical_checks">
+        <option value="Passed">Passed</option>
+        <option value="Not Passed">Not Passed</option>
+    </select><br>
+    <input type="submit" value="Додати">
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Створити новий звіт</h2>
+<form method="post" action="/reports/new">
+    Виберіть період:<br>
+    Початок: <input type="date" name="start_date" required><br>
+    Кінець: <input type="date" name="end_date" required><br>
+    Тип звіту:
+    <select name="type" id="type_select" onchange="toggleCarField()">
+        <option value="CarsPark">Завантаженість авто</option>
+        <option value="Money">Витрати</option>
+        <option value="Car">По автотранспортному засобу</option>
+    </select><br>
+    <div id="car_select_div" style="display:none;">
+        Виберіть авто: 
+        <select name="car_id">
+            {% for car in cars %}
+            <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+            {% endfor %}
+        </select>
+    </div><br>
+    <input type="submit" value="Згенерувати">
+</form>
+<script>
+function toggleCarField() {
+    var type = document.getElementById('type_select').value;
+    document.getElementById('car_select_div').style.display = (type === 'Car') ? 'block' : 'none';
+}
+</script>
+{% endblock %}

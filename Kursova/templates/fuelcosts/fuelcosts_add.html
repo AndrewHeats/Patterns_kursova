@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Додати витрати на паливо</h2>
+<form method="post" action="/fuelcosts/add">
+    Дата: <input type="date" name="date" required><br>
+    Тип: <input type="text" name="type" required><br>
+    Вартість: <input type="number" name="cost" required min="0"><br>
+    Машина: <select name="car_id">
+        {% for car in cars %}
+        <option value="{{ car.id }}">{{ car.brand }} {{ car.model }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Додати">
+</form>
+{% endblock %}

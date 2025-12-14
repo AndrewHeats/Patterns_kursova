@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Видалити ТО</h2>
+<p>Ви дійсно хочете видалити ТО {{ maintenance.type }} (ID: {{ maintenance.id }})?</p>
+<form method="post" action="/maintenances/delete/{{ maintenance.id }}">
+    <button type="submit">Так, видалити</button>
+    <a href="/maintenances" class="cancel-btn">Відмінити</a>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редагувати сповіщення</h2>
+<form method="post" action="/notifications/edit/{{ notification.id }}">
+    Дата: <input type="date" name="date" value="{{ notification.date }}" required><br>
+    Тип: <input type="text" name="type" value="{{ notification.type }}" required><br>
+    Повідомлення: <textarea name="message" required>{{ notification.message }}</textarea><br>
+    Машина (ID, необов’язково): <input type="number" name="car_id" value="{{ notification.car_id }}"><br>
+    Водій (ID, необов’язково): <input type="number" name="driver_id" value="{{ notification.driver_id }}"><br>
+    <input type="submit" value="Зберегти">
+</form>
+<a href="/notifications">Повернутися до списку</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Страхування</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Поліс</th>
+        <th>Дата закінчення</th>
+        <th>Вартість</th>
+        <th>Машина</th>
+        <th>Дії</th>
+    </tr>
+    {% for ins in insurances %}
+    <tr>
+        <td>{{ ins.id }}</td>
+        <td>{{ ins.policy_number }}</td>
+        <td>{{ ins.expiry_date }}</td>
+        <td>{{ ins.cost }}</td>
+        <td>{{ ins.car_id }}</td>
+        <td>
+            <a href="/insurances/edit/{{ ins.id }}" class="btn-table edit-btn">Оновити</a>
+            <a href="/insurances/delete/{{ ins.id }}" class="btn-table delete-btn">Видалити</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="/insurances/add" class="adding_rel">Додати страховку</a>
+{% endblock %}
